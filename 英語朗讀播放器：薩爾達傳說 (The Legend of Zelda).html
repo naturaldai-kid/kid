@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>薩爾達傳說 The Legend of Zelda — 互動英語有聲閱讀與口說練習</title>
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入適合兒童與繁體中文閱讀的圓潤字體 Nunito 與 Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hyrule: {
+              dark: '#1b4332',
+              forest: '#2d6a4f',
+              mint: '#d8f3dc',
+              parchment: '#fdfaf1',
+              card: '#fffdf7',
+              gold: '#d4a373',
+              amber: '#e9c46a',
+              bronze: '#9a741c'
+            }
+          },
+          fontFamily: {
+            sans: ['Nunito', 'Noto Sans TC', 'Microsoft JhengHei', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* 海拉魯冒險風格背景與滑桿自訂樣式 */
+    body {
+      background-color: #fdfaf1;
+      background-image: radial-gradient(#d4a37333 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #1e293b;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    input[type="range"].hyrule-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    input[type="range"].hyrule-slider::-webkit-slider-runnable-track {
+      height: 10px;
+      border-radius: 9999px;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+    }
+
+    input[type="range"].hyrule-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -6px;
+      background-color: #1b4332;
+      border: 3px solid #e9c46a;
+      height: 22px;
+      width: 22px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s ease;
+    }
+
+    input[type="range"].hyrule-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+    }
+
+    input[type="range"].hyrule-slider::-moz-range-track {
+      height: 10px;
+      border-radius: 9999px;
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+    }
+
+    input[type="range"].hyrule-slider::-moz-range-thumb {
+      background-color: #1b4332;
+      border: 3px solid #e9c46a;
+      height: 20px;
+      width: 20px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 音波跳動動畫 */
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.35); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar-1 { animation: soundWave 0.7s ease-in-out infinite; }
+    .wave-bar-2 { animation: soundWave 0.7s ease-in-out 0.15s infinite; }
+    .wave-bar-3 { animation: soundWave 0.7s ease-in-out 0.3s infinite; }
+
+    /* 星星彈出動畫 */
+    @keyframes starPop {
+      0% { transform: scale(0.6); opacity: 0; }
+      70% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-star-pop {
+      animation: starPop 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased pb-16">
+
+  <!-- 頂部海拉魯主題橫幅與勇者星星計分板 -->
+  <header class="bg-gradient-to-r from-[#1b4332] via-[#24553f] to-[#1b4332] text-white border-b-4 border-[#d4a373] shadow-md">
+    <div class="max-w-4xl mx-auto px-4 py-5 sm:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5 text-center sm:text-left">
+        <!-- 內嵌 SVG 三角神力徽章 -->
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#2d6a4f] border-2 border-[#e9c46a] flex items-center justify-center shrink-0 shadow-inner">
+          <svg class="w-8 h-8 text-[#e9c46a]" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+            <polygon points="32,6 46,30 18,30" />
+            <polygon points="18,32 32,56 4,56" />
+            <polygon points="46,32 60,56 32,56" />
+          </svg>
+        </div>
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#e9c46a]/20 border border-[#e9c46a]/40 text-[#e9c46a] text-xs font-bold tracking-wide mb-1">
+            <span>國小英語有聲講義</span>
+            <span>•</span>
+            <span>AI 語音跟讀評分</span>
+          </div>
+          <h1 class="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white leading-snug">
+            薩爾達傳說 <span class="text-[#e9c46a]">The Legend of Zelda</span>
+            <span class="block sm:inline text-sm sm:text-base font-bold text-[#d8f3dc] sm:ml-1">— 互動英語有聲閱讀與口說練習</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- 頂部累積星星計分板 + 重置星星紀錄按鈕 -->
+      <div class="flex flex-col items-center md:items-end gap-2 shrink-0">
+        <div class="px-4 py-2 rounded-2xl bg-[#133124] border-2 border-[#e9c46a] shadow-sm flex items-center gap-2.5">
+          <span class="text-lg sm:text-xl" aria-hidden="true">🏆</span>
+          <span id="totalStarsBadge" class="text-sm sm:text-base font-black text-[#e9c46a] tracking-wide">
+            累積星星：0 / 36 ⭐
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btnResetStars" type="button"
+            class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[#d8f3dc] text-xs font-bold transition cursor-pointer">
+            重置星星紀錄
+          </button>
+          <div id="resetConfirmBox" class="hidden items-center gap-1.5 bg-rose-950/90 border border-rose-400/60 px-2.5 py-1 rounded-lg text-xs">
+            <span class="text-rose-200 font-bold">確定清空？</span>
+            <button id="btnConfirmReset" type="button" class="px-2 py-0.5 rounded bg-rose-600 hover:bg-rose-500 text-white font-extrabold cursor-pointer">確定</button>
+            <button id="btnCancelReset" type="button" class="px-2 py-0.5 rounded bg-slate-600 hover:bg-slate-500 text-white font-bold cursor-pointer">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 mt-5 sm:mt-6 space-y-6">
+
+    <!-- 狀態列與相容性提示區 -->
+    <div class="space-y-2.5">
+      <!-- 即時操作狀態膠囊 -->
+      <div id="statusBadge" class="px-4 py-2.5 rounded-2xl bg-[#1b4332] text-[#d8f3dc] border border-[#2d6a4f] text-xs sm:text-sm font-bold flex items-center justify-between gap-2 shadow-xs">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span id="statusDot" class="w-2.5 h-2.5 rounded-full bg-[#e9c46a] shrink-0"></span>
+          <span id="statusText" class="truncate">準備就緒！按「🔊 聽示範」或「🎤 換我唸」開始挑戰</span>
+        </div>
+        <span class="text-[11px] text-[#e9c46a] font-extrabold shrink-0 hidden sm:inline">集滿 36 顆勇者之星！</span>
+      </div>
+
+      <!-- 瀏覽器不支援語音合成 (TTS) 提示框 -->
+      <div id="ttsUnsupportedBanner" class="hidden rounded-2xl bg-amber-50 border-2 border-amber-400 p-4 text-amber-900 shadow-sm">
+        <p class="font-bold text-sm sm:text-base">⚠️ 您的瀏覽器目前不支援語音朗讀功能</p>
+        <p class="text-xs sm:text-sm mt-1">建議使用最新版 Chrome、Edge 或 Safari 瀏覽器開啟此網頁，即可聆聽示範發音。</p>
+      </div>
+
+      <!-- 麥克風 / 語音辨識 (STT) 相容性與安全網址提醒框 -->
+      <div id="sttWarningBanner" class="hidden rounded-2xl bg-amber-50 border-2 border-amber-400 p-4 text-amber-950 shadow-sm">
+        <p id="sttWarningTitle" class="font-extrabold text-sm sm:text-base">🎤 口說評分功能使用小提醒</p>
+        <p id="sttWarningDesc" class="text-xs sm:text-sm mt-1 leading-relaxed">
+          為保護麥克風隱私，語音辨識評分需透過 <strong>https:// 網址</strong> 並在 <strong>Safari（iPhone/iPad）</strong> 或 <strong>Chrome（電腦/Android）</strong> 開啟。若目前是直接點開本機檔案或 LINE 內建瀏覽器，請上傳至免費網頁空間並用標準瀏覽器開啟！
+        </p>
+      </div>
+    </div>
+
+    <!-- 控制台卡片：全篇播放、輔助開關、QR Code、口音切換、語速控制 -->
+    <section aria-label="朗讀與口說控制面板" class="bg-white rounded-3xl border-2 border-[#d4a373]/60 shadow-sm p-4 sm:p-6 space-y-5">
+
+      <!-- 第一列：全篇連播控制 + QR Code 按鈕 -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="btnPlayAll" type="button"
+            class="min-h-[46px] px-4 sm:px-5 py-2.5 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] active:scale-[0.98] text-white font-extrabold text-sm sm:text-base shadow-sm flex items-center gap-2 transition cursor-pointer">
+            <span>▶</span>
+            <span>全篇連播</span>
+          </button>
+
+          <button id="btnPauseResume" type="button" disabled
+            class="min-h-[46px] px-3.5 sm:px-4 py-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 disabled:opacity-40 disabled:pointer-events-none active:scale-[0.98] text-amber-950 border border-amber-300 font-bold text-sm sm:text-base flex items-center gap-1.5 transition cursor-pointer">
+            <span id="pauseIcon">⏸</span>
+            <span id="pauseLabel">暫停 / 繼續</span>
+          </button>
+
+          <button id="btnStop" type="button" disabled
+            class="min-h-[46px] px-3.5 sm:px-4 py-2.5 rounded-2xl bg-rose-50 hover:bg-rose-100 disabled:opacity-40 disabled:pointer-events-none active:scale-[0.98] text-rose-800 border border-rose-200 font-bold text-sm sm:text-base flex items-center gap-1.5 transition cursor-pointer">
+            <span>⏹</span>
+            <span>停止</span>
+          </button>
+        </div>
+
+        <!-- 顯示本頁 QR Code 按鈕 -->
+        <button id="btnOpenQrModal" type="button"
+          class="min-h-[46px] px-4 py-2.5 rounded-2xl bg-[#fefae0] hover:bg-[#faedcd] border-2 border-[#d4a373] active:scale-[0.98] text-[#1b4332] font-extrabold text-sm flex items-center justify-center gap-2 transition cursor-pointer shrink-0">
+          <span>📱</span>
+          <span>顯示本頁 QR Code</span>
+        </button>
+      </div>
+
+      <!-- 第二列：學習輔助切換開關（單句重複跟讀 & 顯示中文翻譯） -->
+      <div class="flex flex-wrap items-center gap-2.5 pb-4 border-b border-slate-100">
+        <button id="btnToggleLoop" type="button" aria-pressed="false"
+          class="min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer">
+          <span>🔁</span>
+          <span>單句重複跟讀 (句末停頓1.2秒)</span>
+          <span id="loopStateTag" class="px-2 py-0.5 rounded-md bg-slate-200 text-slate-600 text-xs font-extrabold">關</span>
+        </button>
+
+        <button id="btnToggleTranslation" type="button" aria-pressed="false"
+          class="min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer">
+          <span>🇹🇼</span>
+          <span>顯示中文翻譯</span>
+          <span id="transStateTag" class="px-2 py-0.5 rounded-md bg-slate-200 text-slate-600 text-xs font-extrabold">關</span>
+        </button>
+      </div>
+
+      <!-- 第三列：口音切換 & 語速調整 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+
+        <!-- 口音切換區 (佔 5 欄) -->
+        <div class="lg:col-span-5 bg-[#fdfaf1] rounded-2xl p-3.5 border border-[#d4a373]/40 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label class="text-xs sm:text-sm font-extrabold text-[#1b4332]">
+              🌍 英語口音切換（同步套用評分）
+            </label>
+            <span id="accentHint" class="text-[11px] font-bold text-[#9a741c]">en-US</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 bg-white p-1.5 rounded-xl border border-slate-200">
+            <button id="btnAccentUS" type="button"
+              class="min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer bg-[#1b4332] text-white shadow-sm">
+              <span>🇺🇸</span>
+              <span>美國口音 (en-US)</span>
+            </button>
+            <button id="btnAccentUK" type="button"
+              class="min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer text-slate-600 hover:bg-slate-100">
+              <span>🇬🇧</span>
+              <span>英國口音 (en-GB)</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2 pt-0.5">
+            <label for="voiceSelect" class="text-xs font-bold text-slate-500 shrink-0">示範語音：</label>
+            <select id="voiceSelect"
+              class="w-full text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#2d6a4f] truncate">
+              <option value="">載入語音清單中...</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 語速調整區 (佔 7 欄) -->
+        <div class="lg:col-span-7 bg-[#fdfaf1] rounded-2xl p-3.5 border border-[#d4a373]/40 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label for="speedSlider" class="text-xs sm:text-sm font-extrabold text-[#1b4332]">
+              🐢🐇 示範朗讀語速調整
+            </label>
+            <span id="speedValueBadge" class="px-2.5 py-0.5 rounded-full bg-[#1b4332] text-[#e9c46a] text-xs font-black">
+              1.00x 正常語速
+            </span>
+          </div>
+
+          <!-- 4個常用語速快捷按鈕 -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button type="button" data-rate="0.6"
+              class="speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-[#d8f3dc]/50 text-slate-700 font-bold text-xs transition cursor-pointer">
+              0.6x 慢速跟讀
+            </button>
+            <button type="button" data-rate="0.8"
+              class="speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-[#d8f3dc]/50 text-slate-700 font-bold text-xs transition cursor-pointer">
+              0.8x 清晰慢讀
+            </button>
+            <button type="button" data-rate="1.0"
+              class="speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border-2 border-[#1b4332] bg-[#d8f3dc] text-[#1b4332] font-extrabold text-xs transition cursor-pointer">
+              1.0x 正常語速
+            </button>
+            <button type="button" data-rate="1.2"
+              class="speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-[#d8f3dc]/50 text-slate-700 font-bold text-xs transition cursor-pointer">
+              1.2x 進階挑戰
+            </button>
+          </div>
+
+          <!-- 連續微調滑桿 (0.5x ~ 1.5x) -->
+          <div class="flex items-center gap-3 pt-1">
+            <span class="text-xs font-bold text-slate-500 shrink-0">0.5x</span>
+            <input id="speedSlider" type="range" min="0.5" max="1.5" step="0.05" value="1.0"
+              class="hyrule-slider w-full" aria-label="語速微調滑桿" />
+            <span class="text-xs font-bold text-slate-500 shrink-0">1.5x</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 互動閱讀短文區（共 3 段、12 句，每句附「聽示範」與「換我唸 (評分)」按鈕） -->
+    <section aria-label="閱讀短文跟讀與口說評分區" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-1">
+        <h2 class="text-lg sm:text-xl font-black text-[#1b4332] flex items-center gap-2">
+          <span>📖 閱讀短文跟讀挑戰 (Reading & Speaking)</span>
+        </h2>
+        <p class="text-xs sm:text-sm font-bold text-[#9a741c]">
+          先按「🔊 聽示範」，再按「🎤 換我唸 (評分)」收集星星！
+        </p>
+      </div>
+
+      <div id="passageContainer" class="space-y-4"></div>
+    </section>
+
+    <!-- 重點單字點讀與單字口說測試區 (10 個核心單字) -->
+    <section aria-label="重點單字發音與跟讀測試" class="bg-white rounded-3xl border-2 border-[#d4a373]/60 shadow-sm p-4 sm:p-6 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-100 pb-3">
+        <h2 class="text-lg sm:text-xl font-black text-[#1b4332] flex items-center gap-2">
+          <span>🗡️ 重點單字寶庫 (Key Vocabulary)</span>
+        </h2>
+        <p class="text-xs sm:text-sm font-semibold text-slate-500">
+          點單字聽發音，或按「🎤 單字跟讀測試」挑戰單字發音！
+        </p>
+      </div>
+
+      <div id="vocabContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3"></div>
+    </section>
+
+  </main>
+
+  <!-- QR Code 彈出視窗 Modal -->
+  <div id="qrModal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle"
+    class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl border-4 border-[#d4a373] max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 relative">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#d8f3dc] text-[#1b4332] text-xs font-extrabold mb-1">
+            手機 / 平板掃碼練習
+          </span>
+          <h3 id="qrModalTitle" class="text-lg sm:text-xl font-black text-[#1b4332]">
+            📱 本頁專屬 QR Code
+          </h3>
+        </div>
+        <button id="btnCloseQrModal" type="button" aria-label="關閉視窗"
+          class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-lg flex items-center justify-center cursor-pointer">
+          ✕
+        </button>
+      </div>
+
+      <!-- QR Code 畫布展示框 -->
+      <div class="bg-[#fdfaf1] rounded-2xl border-2 border-[#d4a373]/60 p-4 flex flex-col items-center justify-center gap-3">
+        <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200">
+          <canvas id="qrCanvas" width="220" height="220" class="block mx-auto"></canvas>
+        </div>
+        <p id="qrUrlDisplay" class="text-xs font-mono text-slate-600 break-all text-center px-2"></p>
+      </div>
+
+      <!-- 自訂網址預覽輸入框（方便家長上傳後測試產生 QR Code） -->
+      <div class="space-y-1.5">
+        <label for="qrCustomUrlInput" class="block text-xs font-extrabold text-[#1b4332]">
+          🔗 網址（自動抓取目前網頁網址，也可貼上固定網址更新）：
+        </label>
+        <div class="flex gap-2">
+          <input id="qrCustomUrlInput" type="url" placeholder="https://yourname.github.io/english/zelda.html"
+            class="flex-1 text-xs font-medium bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-[#2d6a4f]" />
+          <button id="btnRegenerateQr" type="button"
+            class="px-3 py-2 rounded-xl bg-[#2d6a4f] hover:bg-[#1b4332] text-white text-xs font-extrabold shrink-0 cursor-pointer">
+            更新
+          </button>
+        </div>
+      </div>
+
+      <!-- 列印與使用說明 -->
+      <div class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3 text-xs text-emerald-950 space-y-1 leading-relaxed">
+        <p class="font-extrabold">🖨️ 列印貼在講義上的小技巧：</p>
+        <p>1. 請先將本網頁上傳至公開免費空間（如 GitHub Pages 或 Netlify）取得 <strong>https://</strong> 網址。</p>
+        <p>2. 點擊下方「下載 QR Code 圖片」，即可直接貼入紙本講義右上角讓小孩掃描！</p>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-1">
+        <button id="btnDownloadQr" type="button"
+          class="min-h-[44px] px-4 py-2 rounded-2xl bg-[#1b4332] hover:bg-[#2d6a4f] text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 cursor-pointer">
+          <span>⬇️</span>
+          <span>下載 QR Code 圖片</span>
+        </button>
+        <button id="btnCloseQrModalBottom" type="button"
+          class="min-h-[44px] px-4 py-2 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold cursor-pointer">
+          關閉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ==========================================
+      // 1. 教材資料定義（12 句短文 + 10 個重點單字）
+      // ==========================================
+      const PARAGRAPHS = [
+        {
+          id: 1,
+          title: '第一段：海拉魯的危機',
+          badgeColor: 'bg-[#2d6a4f] text-white',
+          sentences: [
+            {
+              id: 1,
+              en: 'Link is a brave young boy.',
+              zh: '林克是一個勇敢的年輕男孩。'
+            },
+            {
+              id: 2,
+              en: 'He lives in a green land called Hyrule.',
+              zh: '他住在一個叫做海拉魯的綠色大地。'
+            },
+            {
+              id: 3,
+              en: 'One day, a bad king takes Princess Zelda away.',
+              zh: '有一天，一個壞國王把薩爾達公主抓走了。'
+            },
+            {
+              id: 4,
+              en: 'Link wants to save her!',
+              zh: '林克想要拯救她！'
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: '第二段：勇者的冒險旅程',
+          badgeColor: 'bg-[#9a741c] text-white',
+          sentences: [
+            {
+              id: 5,
+              en: 'Link has a sharp sword and a strong shield.',
+              zh: '林克有一把鋒利的劍和一面堅固的盾牌。'
+            },
+            {
+              id: 6,
+              en: 'He walks through big forests and climbs high mountains.',
+              zh: '他走過大森林並爬上高山。'
+            },
+            {
+              id: 7,
+              en: 'On his way, he meets many kind friends and fights bad monsters.',
+              zh: '在路上，他遇到許多善良的朋友並對抗壞怪物。'
+            },
+            {
+              id: 8,
+              en: 'Sometimes, he solves fun puzzles to open secret doors.',
+              zh: '有時候，他解開有趣的謎題來打開秘密的門。'
+            }
+          ]
+        },
+        {
+          id: 3,
+          title: '第三段：智慧、勇氣與和平',
+          badgeColor: 'bg-[#1b4332] text-[#e9c46a]',
+          sentences: [
+            {
+              id: 9,
+              en: 'Link is not afraid.',
+              zh: '林克並不害怕。'
+            },
+            {
+              id: 10,
+              en: 'He uses his wisdom and courage to beat the bad king.',
+              zh: '他用他的智慧和勇氣打敗壞國王。'
+            },
+            {
+              id: 11,
+              en: 'In the end, Link saves Princess Zelda, and peace returns to Hyrule.',
+              zh: '最後，林克拯救了薩爾達公主，和平回到了海拉魯。'
+            },
+            {
+              id: 12,
+              en: 'What a great adventure!',
+              zh: '多麼棒的一場冒險啊！'
+            }
+          ]
+        }
+      ];
+
+      const ALL_SENTENCES = PARAGRAPHS.flatMap(p => p.sentences);
+
+      const VOCABULARY = [
+        { word: 'brave', pos: 'adj.', phonetic: '/breɪv/', zh: '勇敢的' },
+        { word: 'princess', pos: 'n.', phonetic: '/ˈprɪn.ses/', zh: '公主' },
+        { word: 'save', pos: 'v.', phonetic: '/seɪv/', zh: '拯救' },
+        { word: 'sword', pos: 'n.', phonetic: '/sɔːrd/', zh: '劍' },
+        { word: 'shield', pos: 'n.', phonetic: '/ʃiːld/', zh: '盾牌' },
+        { word: 'forest', pos: 'n.', phonetic: '/ˈfɔːr.ɪst/', zh: '森林' },
+        { word: 'monster', pos: 'n.', phonetic: '/ˈmɑːn.stɚ/', zh: '怪物' },
+        { word: 'puzzle', pos: 'n.', phonetic: '/ˈpʌz.əl/', zh: '謎題' },
+        { word: 'afraid', pos: 'adj.', phonetic: '/əˈfreɪd/', zh: '害怕的' },
+        { word: 'adventure', pos: 'n.', phonetic: '/ədˈven.tʃɚ/', zh: '冒險' }
+      ];
+
+      const STORAGE_KEY = 'zelda_reading_stars_v1';
+
+      // ==========================================
+      // 2. 應用程式狀態管理
+      // ==========================================
+      const state = {
+        accent: 'en-US',             // 'en-US' | 'en-GB'
+        selectedVoiceURI: '',
+        rate: 1.0,
+        // TTS 朗讀狀態
+        ttsMode: 'idle',             // 'idle' | 'single' | 'all' | 'vocab'
+        activeSentenceId: null,
+        activeVocabWord: null,
+        isPaused: false,
+        isLooping: false,
+        isShadowingPause: false,
+        showTranslation: false,
+        voices: [],
+        sessionId: 0,
+        loopTimerId: null,
+        // STT 口說評分狀態
+        sttSupported: false,
+        recordingTarget: null,       // null | { type: 'sentence', id: number } | { type: 'vocab', word: string }
+        liveTranscript: '',
+        sentenceResults: {},         // { [sentenceId]: { stars, score, wordResults, transcript, praise } }
+        vocabResults: {},            // { [word]: { matched, transcript } }
+        bestStars: {}                // { [sentenceId]: 1|2|3 }
+      };
+
+      let activeRecognition = null;
+
+      // ==========================================
+      // 3. DOM 元素快取
+      // ==========================================
+      const el = {
+        totalStarsBadge: document.getElementById('totalStarsBadge'),
+        btnResetStars: document.getElementById('btnResetStars'),
+        resetConfirmBox: document.getElementById('resetConfirmBox'),
+        btnConfirmReset: document.getElementById('btnConfirmReset'),
+        btnCancelReset: document.getElementById('btnCancelReset'),
+        statusDot: document.getElementById('statusDot'),
+        statusText: document.getElementById('statusText'),
+        ttsUnsupportedBanner: document.getElementById('ttsUnsupportedBanner'),
+        sttWarningBanner: document.getElementById('sttWarningBanner'),
+        sttWarningTitle: document.getElementById('sttWarningTitle'),
+        sttWarningDesc: document.getElementById('sttWarningDesc'),
+        btnPlayAll: document.getElementById('btnPlayAll'),
+        btnPauseResume: document.getElementById('btnPauseResume'),
+        pauseIcon: document.getElementById('pauseIcon'),
+        pauseLabel: document.getElementById('pauseLabel'),
+        btnStop: document.getElementById('btnStop'),
+        btnOpenQrModal: document.getElementById('btnOpenQrModal'),
+        btnToggleLoop: document.getElementById('btnToggleLoop'),
+        loopStateTag: document.getElementById('loopStateTag'),
+        btnToggleTranslation: document.getElementById('btnToggleTranslation'),
+        transStateTag: document.getElementById('transStateTag'),
+        btnAccentUS: document.getElementById('btnAccentUS'),
+        btnAccentUK: document.getElementById('btnAccentUK'),
+        accentHint: document.getElementById('accentHint'),
+        voiceSelect: document.getElementById('voiceSelect'),
+        speedSlider: document.getElementById('speedSlider'),
+        speedValueBadge: document.getElementById('speedValueBadge'),
+        speedPresets: Array.from(document.querySelectorAll('.speed-preset')),
+        passageContainer: document.getElementById('passageContainer'),
+        vocabContainer: document.getElementById('vocabContainer'),
+        // QR Modal
+        qrModal: document.getElementById('qrModal'),
+        btnCloseQrModal: document.getElementById('btnCloseQrModal'),
+        btnCloseQrModalBottom: document.getElementById('btnCloseQrModalBottom'),
+        qrCanvas: document.getElementById('qrCanvas'),
+        qrUrlDisplay: document.getElementById('qrUrlDisplay'),
+        qrCustomUrlInput: document.getElementById('qrCustomUrlInput'),
+        btnRegenerateQr: document.getElementById('btnRegenerateQr'),
+        btnDownloadQr: document.getElementById('btnDownloadQr')
+      };
+
+      // ==========================================
+      // 4. LocalStorage 星星紀錄讀寫
+      // ==========================================
+      function loadStarsFromStorage() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === 'object') {
+              state.bestStars = parsed;
+            }
+          }
+        } catch (e) {
+          state.bestStars = {};
+        }
+      }
+
+      function saveStarsToStorage() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.bestStars));
+        } catch (e) {
+          // 忽略無痕模式寫入限制
+        }
+      }
+
+      function getTotalStarsCount() {
+        return ALL_SENTENCES.reduce((sum, s) => sum + (Number(state.bestStars[s.id]) || 0), 0);
+      }
+
+      function updateTopStarScoreboard() {
+        const total = getTotalStarsCount();
+        const maxTotal = ALL_SENTENCES.length * 3;
+        el.totalStarsBadge.textContent = `累積星星：${total} / ${maxTotal} ⭐`;
+      }
+
+      // ==========================================
+      // 5. TTS 語音朗讀引擎 (SpeechSynthesis)
+      // ==========================================
+      const synth = window.speechSynthesis;
+      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      function checkEnvironmentSupport() {
+        if (!synth || typeof SpeechSynthesisUtterance === 'undefined') {
+          el.ttsUnsupportedBanner.classList.remove('hidden');
+        }
+
+        const isFileProtocol = window.location.protocol === 'file:';
+        const ua = navigator.userAgent || '';
+        const isInAppBrowser = /Line\/|FBAN|FBAV|Instagram|MicroMessenger/i.test(ua);
+
+        if (!SpeechRecognitionAPI) {
+          state.sttSupported = false;
+          el.sttWarningBanner.classList.remove('hidden');
+          el.sttWarningTitle.textContent = '⚠️ 目前瀏覽器不支援「跟讀語音評分」';
+          el.sttWarningDesc.innerHTML = '請改用 <strong>iPhone / iPad 的 Safari</strong> 或 <strong>電腦 / Android 的 Chrome</strong> 開啟，即可使用麥克風跟讀與星星評分功能！';
+        } else {
+          state.sttSupported = true;
+          if (isFileProtocol || isInAppBrowser) {
+            el.sttWarningBanner.classList.remove('hidden');
+            el.sttWarningTitle.textContent = '💡 開啟方式提醒（確保麥克風可正常評分）';
+            el.sttWarningDesc.innerHTML = isFileProtocol
+              ? '您目前是直接點開本機檔案 (<code>file://</code>)，部分瀏覽器會限制麥克風權限。將網頁上傳至免費空間取得 <strong>https://</strong> 網址後，即可順暢使用跟讀評分！'
+              : '偵測到您正在使用 App 內建瀏覽器，建議點選右上角「<strong>在預設瀏覽器（Safari / Chrome）中開啟</strong>」，才能順利啟用麥克風評分！';
+          }
+        }
+      }
+
+      function getVoicesForAccent(accentCode) {
+        const prefix = accentCode.toLowerCase();
+        const altPrefix = prefix.replace('-', '_');
+        const matching = state.voices.filter(v => {
+          const lang = (v.lang || '').toLowerCase();
+          return lang.startsWith(prefix) || lang.startsWith(altPrefix);
+        });
+
+        const preferredKeywords = [
+          'natural', 'online', 'google', 'samantha', 'daniel',
+          'aria', 'jenny', 'sonia', 'libby', 'serena', 'alex', 'microsoft'
+        ];
+
+        return matching.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+          const scoreA = preferredKeywords.findIndex(k => nameA.includes(k));
+          const scoreB = preferredKeywords.findIndex(k => nameB.includes(k));
+          const rankA = scoreA === -1 ? 999 : scoreA;
+          const rankB = scoreB === -1 ? 999 : scoreB;
+          if (rankA !== rankB) return rankA - rankB;
+          return a.name.localeCompare(b.name);
+        });
+      }
+
+      function populateVoiceDropdown(preserveCurrentSelection = false) {
+        if (!synth) return;
+        state.voices = synth.getVoices() || [];
+
+        const filtered = getVoicesForAccent(state.accent);
+        const fallbackEnglish = state.voices.filter(v => (v.lang || '').toLowerCase().startsWith('en'));
+        const listToUse = filtered.length > 0 ? filtered : fallbackEnglish;
+
+        el.voiceSelect.innerHTML = '';
+
+        if (listToUse.length === 0) {
+          const opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = state.accent === 'en-US' ? '系統預設美式英語 (en-US)' : '系統預設英式英語 (en-GB)';
+          el.voiceSelect.appendChild(opt);
+          state.selectedVoiceURI = '';
+          return;
+        }
+
+        listToUse.forEach(voice => {
+          const opt = document.createElement('option');
+          opt.value = voice.voiceURI;
+          const cleanName = voice.name
+            .replace(/Microsoft\s+/i, '')
+            .replace(/Online\s*\(Natural\)\s*-\s*/i, '✨ ')
+            .replace(/Google\s+/i, 'Google ');
+          opt.textContent = `${cleanName} (${voice.lang})`;
+          el.voiceSelect.appendChild(opt);
+        });
+
+        if (preserveCurrentSelection && listToUse.some(v => v.voiceURI === state.selectedVoiceURI)) {
+          el.voiceSelect.value = state.selectedVoiceURI;
+        } else {
+          state.selectedVoiceURI = listToUse[0].voiceURI;
+          el.voiceSelect.value = state.selectedVoiceURI;
+        }
+      }
+
+      function getActiveVoiceObject() {
+        if (!state.selectedVoiceURI) return null;
+        return state.voices.find(v => v.voiceURI === state.selectedVoiceURI) || null;
+      }
+
+      function clearLoopTimer() {
+        if (state.loopTimerId !== null) {
+          clearTimeout(state.loopTimerId);
+          state.loopTimerId = null;
+        }
+        state.isShadowingPause = false;
+      }
+
+      function stopTTS(resetUI = true) {
+        state.sessionId++;
+        clearLoopTimer();
+        if (synth) {
+          try { synth.cancel(); } catch (e) {}
+        }
+        if (resetUI) {
+          state.ttsMode = 'idle';
+          state.activeSentenceId = null;
+          state.activeVocabWord = null;
+          state.isPaused = false;
+          renderAllStates();
+          if (!state.recordingTarget) {
+            updateStatus('準備就緒！按「🔊 聽示範」或「🎤 換我唸」開始挑戰', 'bg-[#e9c46a]');
+          }
+        }
+      }
+
+      function playSentence(sentenceId, mode = 'single', shouldScroll = false) {
+        if (!synth) return;
+        // 若正在錄音，先停止錄音避免麥克風收到喇叭聲音
+        if (state.recordingTarget) {
+          stopRecording(true);
+        }
+
+        const sentenceObj = ALL_SENTENCES.find(s => s.id === sentenceId);
+        if (!sentenceObj) {
+          stopTTS(true);
+          return;
+        }
+
+        state.sessionId++;
+        const currentSession = state.sessionId;
+        clearLoopTimer();
+        try { synth.cancel(); } catch (e) {}
+
+        state.ttsMode = mode;
+        state.activeSentenceId = sentenceId;
+        state.activeVocabWord = null;
+        state.isPaused = false;
+        state.isShadowingPause = false;
+
+        renderAllStates();
+        if (shouldScroll) {
+          scrollToSentence(sentenceId);
+        }
+
+        const accentLabel = state.accent === 'en-US' ? '🇺🇸 美式' : '🇬🇧 英式';
+        const modeLabel = mode === 'all'
+          ? `全篇連播：第 ${sentenceId} / ${ALL_SENTENCES.length} 句`
+          : (state.isLooping ? `單句重複跟讀：第 ${sentenceId} 句` : `示範朗讀：第 ${sentenceId} 句`);
+        updateStatus(`${accentLabel} • ${modeLabel}`, 'bg-emerald-400 animate-pulse');
+
+        setTimeout(() => {
+          if (currentSession !== state.sessionId) return;
+
+          const utterance = new SpeechSynthesisUtterance(sentenceObj.en);
+          utterance.lang = state.accent;
+          utterance.rate = state.rate;
+          utterance.pitch = 1.0;
+
+          const voiceObj = getActiveVoiceObject();
+          if (voiceObj) {
+            utterance.voice = voiceObj;
+          }
+
+          utterance.onend = () => {
+            if (currentSession !== state.sessionId) return;
+
+            if (state.ttsMode === 'all') {
+              const nextId = sentenceId + 1;
+              if (nextId <= ALL_SENTENCES.length) {
+                state.loopTimerId = setTimeout(() => {
+                  if (currentSession !== state.sessionId) return;
+                  playSentence(nextId, 'all', true);
+                }, 350);
+              } else {
+                stopTTS(true);
+                updateStatus('🎉 全篇朗讀完成！試試按「🎤 換我唸 (評分)」挑戰自己吧！', 'bg-[#e9c46a]');
+              }
+            } else if (state.ttsMode === 'single' && state.isLooping) {
+              state.isShadowingPause = true;
+              renderAllStates();
+              updateStatus(`🗣️ 換你跟讀囉...（1.2 秒後重複第 ${sentenceId} 句）`, 'bg-amber-400 animate-pulse');
+
+              state.loopTimerId = setTimeout(() => {
+                if (currentSession !== state.sessionId || state.isPaused) return;
+                playSentence(sentenceId, 'single', false);
+              }, 1200);
+            } else {
+              stopTTS(true);
+            }
+          };
+
+          utterance.onerror = (event) => {
+            if (currentSession !== state.sessionId) return;
+            if (event && (event.error === 'interrupted' || event.error === 'canceled')) return;
+            stopTTS(true);
+            updateStatus('語音播放中斷，請再點選一次重試', 'bg-amber-400');
+          };
+
+          synth.speak(utterance);
+        }, 35);
+      }
+
+      function playVocabularyWord(word) {
+        if (!synth) return;
+        if (state.recordingTarget) {
+          stopRecording(true);
+        }
+
+        state.sessionId++;
+        const currentSession = state.sessionId;
+        clearLoopTimer();
+        try { synth.cancel(); } catch (e) {}
+
+        state.ttsMode = 'vocab';
+        state.activeSentenceId = null;
+        state.activeVocabWord = word;
+        state.isPaused = false;
+        state.isShadowingPause = false;
+
+        renderAllStates();
+        const accentLabel = state.accent === 'en-US' ? '🇺🇸 美式' : '🇬🇧 英式';
+        updateStatus(`${accentLabel} • 單字示範：${word}`, 'bg-emerald-400 animate-pulse');
+
+        setTimeout(() => {
+          if (currentSession !== state.sessionId) return;
+
+          const utterance = new SpeechSynthesisUtterance(word);
+          utterance.lang = state.accent;
+          utterance.rate = state.rate;
+
+          const voiceObj = getActiveVoiceObject();
+          if (voiceObj) {
+            utterance.voice = voiceObj;
+          }
+
+          utterance.onend = () => {
+            if (currentSession !== state.sessionId) return;
+            stopTTS(true);
+          };
+
+          utterance.onerror = () => {
+            if (currentSession !== state.sessionId) return;
+            stopTTS(true);
+          };
+
+          synth.speak(utterance);
+        }, 35);
+      }
+
+      function togglePauseResume() {
+        if (!synth || state.ttsMode === 'idle') return;
+
+        if (!state.isPaused) {
+          state.isPaused = true;
+          if (state.isShadowingPause) {
+            clearTimeout(state.loopTimerId);
+            state.loopTimerId = null;
+          } else {
+            try { synth.pause(); } catch (e) {}
+          }
+          renderControlButtons();
+          updateStatus('⏸ 已暫停朗讀，點擊「繼續」恢復播放', 'bg-amber-400');
+        } else {
+          state.isPaused = false;
+          renderControlButtons();
+
+          if (state.isShadowingPause && state.activeSentenceId) {
+            playSentence(state.activeSentenceId, state.ttsMode, false);
+          } else {
+            try {
+              synth.resume();
+              setTimeout(() => {
+                if (!state.isPaused && state.ttsMode !== 'idle' && !synth.speaking && state.activeSentenceId) {
+                  playSentence(state.activeSentenceId, state.ttsMode, false);
+                }
+              }, 150);
+            } catch (e) {
+              if (state.activeSentenceId) {
+                playSentence(state.activeSentenceId, state.ttsMode, false);
+              }
+            }
+            const accentLabel = state.accent === 'en-US' ? '🇺🇸 美式' : '🇬🇧 英式';
+            updateStatus(`${accentLabel} • 繼續朗讀中...`, 'bg-emerald-400 animate-pulse');
+          }
+        }
+      }
+
+      function setAccent(newAccent) {
+        if (state.accent === newAccent) return;
+        state.accent = newAccent;
+        populateVoiceDropdown(false);
+        renderAccentControls();
+
+        if ((state.ttsMode === 'single' || state.ttsMode === 'all') && state.activeSentenceId && !state.isPaused) {
+          playSentence(state.activeSentenceId, state.ttsMode, false);
+        } else if (state.ttsMode === 'vocab' && state.activeVocabWord) {
+          playVocabularyWord(state.activeVocabWord);
+        }
+      }
+
+      function setSpeechRate(newRate) {
+        const clamped = Math.min(1.5, Math.max(0.5, Number(newRate)));
+        state.rate = Math.round(clamped * 100) / 100;
+        renderSpeedControls();
+
+        if ((state.ttsMode === 'single' || state.ttsMode === 'all') && state.activeSentenceId && !state.isPaused) {
+          playSentence(state.activeSentenceId, state.ttsMode, false);
+        } else if (state.ttsMode === 'vocab' && state.activeVocabWord) {
+          playVocabularyWord(state.activeVocabWord);
+        }
+      }
+
+      // ==========================================
+      // 6. STT 小孩跟讀語音辨識與評分引擎
+      // ==========================================
+      // 常見同音字與海拉魯專有名詞寬容比對表（避免語音辨識拼字差異誤扣小孩分數）
+      const EQUIVALENT_WORDS = {
+        'hyrule': ['hyrule', 'highrule', 'high', 'rule'],
+        'zelda': ['zelda', 'selda'],
+        'link': ['link', 'lincoln'],
+        'sword': ['sword', 'soared'],
+        'boy': ['boy', 'buoy'],
+        'her': ['her', 'hear', 'here'],
+        'to': ['to', 'too', 'two'],
+        'one': ['one', 'won'],
+        'peace': ['peace', 'piece'],
+        'great': ['great', 'grate'],
+        'in': ['in', 'inn'],
+        'way': ['way', 'weigh'],
+        'meets': ['meets', 'meats'],
+        'through': ['through', 'threw'],
+        'high': ['high', 'hi'],
+        'not': ['not', 'knot']
+      };
+
+      function tokenizeEnglish(text) {
+        return (text || '')
+          .toLowerCase()
+          .replace(/n't\b/g, ' not')
+          .replace(/'s\b/g, ' is')
+          .replace(/'re\b/g, ' are')
+          .replace(/'m\b/g, ' am')
+          .replace(/[^a-z0-9\s]/g, ' ')
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+      }
+
+      function isWordEquivalent(targetWord, spokenWord) {
+        if (!targetWord || !spokenWord) return false;
+        if (targetWord === spokenWord) return true;
+        const equivalents = EQUIVALENT_WORDS[targetWord];
+        if (equivalents && equivalents.includes(spokenWord)) return true;
+        return false;
+      }
+
+      // 評估整句跟讀結果（採用順序對齊演算法，計算準確度、星星數與逐字紅綠燈標記）
+      function evaluateSentenceAttempt(sentenceObj, spokenTranscript) {
+        const displayTokens = sentenceObj.en.trim().split(/\s+/);
+        const targetWords = displayTokens.map(tok => tokenizeEnglish(tok)[0] || '');
+        const spokenWords = tokenizeEnglish(spokenTranscript);
+
+        // 处理 "Hyrule" 被語音辨識拆成 "high rule" 兩字的情況
+        const normalizedSpoken = [];
+        for (let i = 0; i < spokenWords.length; i++) {
+          if (spokenWords[i] === 'high' && spokenWords[i + 1] === 'rule') {
+            normalizedSpoken.push('hyrule');
+            i++;
+          } else {
+            normalizedSpoken.push(spokenWords[i]);
+          }
+        }
+
+        const n = targetWords.length;
+        const m = normalizedSpoken.length;
+
+        // 動態規劃 (LCS) 找出最佳單字順序對應
+        const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0));
+        for (let i = n - 1; i >= 0; i--) {
+          for (let j = m - 1; j >= 0; j--) {
+            if (isWordEquivalent(targetWords[i], normalizedSpoken[j])) {
+              dp[i][j] = 1 + dp[i + 1][j + 1];
+            } else {
+              dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+            }
+          }
+        }
+
+        const matchedFlags = Array(n).fill(false);
+        let i = 0;
+        let j = 0;
+        while (i < n && j < m) {
+          if (isWordEquivalent(targetWords[i], normalizedSpoken[j])) {
+            matchedFlags[i] = true;
+            i++;
+            j++;
+          } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+            i++;
+          } else {
+            j++;
+          }
+        }
+
+        const matchedCount = matchedFlags.filter(Boolean).length;
+        const score = n > 0 ? Math.round((matchedCount / n) * 100) : 0;
+
+        let stars = 1;
+        let praise = '';
+        if (score >= 85) {
+          stars = 3;
+          praise = '太厲害了！發音超標準，獲得 3 顆勇者之星！';
+        } else if (score >= 60) {
+          stars = 2;
+          praise = '很棒喔！橘色標記的單字再多唸兩次會更完美！';
+        } else {
+          stars = 1;
+          praise = '別氣餒！先按「聽示範」聽一次，再挑戰看看！';
+        }
+
+        const wordResults = displayTokens.map((rawWord, idx) => ({
+          word: rawWord,
+          matched: matchedFlags[idx]
+        }));
+
+        return {
+          stars,
+          score,
+          wordResults,
+          transcript: spokenTranscript.trim() || '（沒有聽到聲音，請靠近麥克風再試一次）',
+          praise
+        };
+      }
+
+      // 評估單字跟讀測試
+      function evaluateVocabAttempt(targetWord, spokenTranscript) {
+        const spokenWords = tokenizeEnglish(spokenTranscript);
+        const targetNorm = targetWord.toLowerCase();
+        const matched = spokenWords.some(w => isWordEquivalent(targetNorm, w));
+        return {
+          matched,
+          transcript: spokenTranscript.trim() || '（未偵測到聲音）'
+        };
+      }
+
+      function stopRecording(abortWithoutScoring = false) {
+        if (activeRecognition) {
+          const recToStop = activeRecognition;
+          if (abortWithoutScoring) {
+            activeRecognition = null;
+            state.recordingTarget = null;
+            state.liveTranscript = '';
+            try { recToStop.abort(); } catch (e) {}
+            renderAllStates();
+            updateStatus('已停止麥克風錄音', 'bg-[#e9c46a]');
+          } else {
+            try { recToStop.stop(); } catch (e) {}
+          }
+        } else {
+          state.recordingTarget = null;
+          state.liveTranscript = '';
+          renderAllStates();
+        }
+      }
+
+      function startRecording(target) {
+        if (!SpeechRecognitionAPI) {
+          el.sttWarningBanner.classList.remove('hidden');
+          el.sttWarningBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          updateStatus('⚠️ 此瀏覽器不支援麥克風評分，請改用 Safari 或 Chrome', 'bg-amber-400');
+          return;
+        }
+
+        // 若目前正在錄同一個目標，則點擊視為「停止並開始評分」
+        if (
+          state.recordingTarget &&
+          state.recordingTarget.type === target.type &&
+          ((target.type === 'sentence' && state.recordingTarget.id === target.id) ||
+           (target.type === 'vocab' && state.recordingTarget.word === target.word))
+        ) {
+          stopRecording(false);
+          return;
+        }
+
+        // 先停止任何正在播放的示範音檔或前一個錄音
+        stopTTS(true);
+        if (activeRecognition) {
+          stopRecording(true);
+        }
+
+        state.recordingTarget = target;
+        state.liveTranscript = '';
+        renderAllStates();
+
+        const accentLabel = state.accent === 'en-US' ? '🇺🇸 美式' : '🇬🇧 英式';
+        const targetLabel = target.type === 'sentence' ? `第 ${target.id} 句` : `單字「${target.word}」`;
+        updateStatus(`🎤 ${accentLabel}評分中 • 正在聽你唸${targetLabel}...`, 'bg-rose-500 animate-ping');
+
+        const recognition = new SpeechRecognitionAPI();
+        activeRecognition = recognition;
+        recognition.lang = state.accent;
+        recognition.interimResults = true;
+        recognition.continuous = false;
+        recognition.maxAlternatives = 1;
+
+        let finalTranscript = '';
+        let latestInterim = '';
+        let hadError = false;
+
+        recognition.onresult = (event) => {
+          if (activeRecognition !== recognition) return;
+          let interim = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const res = event.results[i];
+            if (res.isFinal) {
+              finalTranscript += res[0].transcript + ' ';
+            } else {
+              interim += res[0].transcript;
+            }
+          }
+          latestInterim = interim;
+          state.liveTranscript = (finalTranscript + interim).trim();
+          renderLiveTranscriptOnly();
+        };
+
+        recognition.onerror = (event) => {
+          if (activeRecognition !== recognition) return;
+          hadError = true;
+          const errCode = event && event.error ? event.error : 'unknown';
+
+          let friendlyMsg = '⚠️ 麥克風辨識未完成，請再按一次重試';
+          if (errCode === 'not-allowed' || errCode === 'service-not-allowed') {
+            friendlyMsg = '🚫 請允許瀏覽器使用「麥克風權限」才能進行口說評分喔！';
+            el.sttWarningBanner.classList.remove('hidden');
+          } else if (errCode === 'no-speech') {
+            friendlyMsg = '🤫 沒有聽到聲音喔！請靠近麥克風大聲唸出來～';
+          } else if (errCode === 'network') {
+            friendlyMsg = '🌐 語音辨識需要網路連線，請檢查 Wi-Fi 或行動網路後再試一次';
+          } else if (errCode === 'aborted') {
+            friendlyMsg = '已取消錄音';
+          }
+
+          activeRecognition = null;
+          state.recordingTarget = null;
+          state.liveTranscript = '';
+          renderAllStates();
+          updateStatus(friendlyMsg, 'bg-amber-400');
+        };
+
+        recognition.onend = () => {
+          if (activeRecognition !== recognition) return;
+          activeRecognition = null;
+          const finishedTarget = state.recordingTarget;
+          const combinedTranscript = (finalTranscript || latestInterim || state.liveTranscript || '').trim();
+
+          state.recordingTarget = null;
+          state.liveTranscript = '';
+
+          if (!hadError && finishedTarget) {
+            if (finishedTarget.type === 'sentence') {
+              const sentenceObj = ALL_SENTENCES.find(s => s.id === finishedTarget.id);
+              if (sentenceObj) {
+                const evaluation = evaluateSentenceAttempt(sentenceObj, combinedTranscript);
+                state.sentenceResults[sentenceObj.id] = evaluation;
+
+                // 更新該句最高星星紀錄
+                const prevBest = Number(state.bestStars[sentenceObj.id]) || 0;
+                if (combinedTranscript && evaluation.stars > prevBest) {
+                  state.bestStars[sentenceObj.id] = evaluation.stars;
+                  saveStarsToStorage();
+                }
+                updateTopStarScoreboard();
+                updateStatus(
+                  `✨ 第 ${sentenceObj.id} 句評分完成：準確度 ${evaluation.score}%（獲得 ${evaluation.stars} 顆星）`,
+                  'bg-[#e9c46a]'
+                );
+              }
+            } else if (finishedTarget.type === 'vocab') {
+              const vocabEval = evaluateVocabAttempt(finishedTarget.word, combinedTranscript);
+              state.vocabResults[finishedTarget.word] = vocabEval;
+              updateStatus(
+                vocabEval.matched
+                  ? `🌟 單字「${finishedTarget.word}」發音超標準！`
+                  : `💪 單字「${finishedTarget.word}」再試一次看看！`,
+                'bg-[#e9c46a]'
+              );
+            }
+          }
+
+          renderAllStates();
+        };
+
+        try {
+          recognition.start();
+        } catch (e) {
+          activeRecognition = null;
+          state.recordingTarget = null;
+          renderAllStates();
+          updateStatus('⚠️ 無法啟動麥克風，請確認瀏覽器權限設定', 'bg-amber-400');
+        }
+      }
+
+      // ==========================================
+      // 7. 介面渲染與視覺狀態同步
+      // ==========================================
+      function updateStatus(text, dotClass) {
+        el.statusText.textContent = text;
+        el.statusDot.className = `w-2.5 h-2.5 rounded-full shrink-0 ${dotClass}`;
+      }
+
+      function scrollToSentence(sentenceId) {
+        const row = document.getElementById(`sentence-card-${sentenceId}`);
+        if (row) {
+          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+
+      function renderControlButtons() {
+        const isPlayingAny = state.ttsMode !== 'idle';
+        el.btnPauseResume.disabled = !isPlayingAny;
+        el.btnStop.disabled = !isPlayingAny;
+
+        if (state.isPaused) {
+          el.pauseIcon.textContent = '▶';
+          el.pauseLabel.textContent = '繼續';
+          el.btnPauseResume.classList.remove('bg-amber-100', 'text-amber-950');
+          el.btnPauseResume.classList.add('bg-emerald-100', 'text-emerald-950', 'border-emerald-300');
+        } else {
+          el.pauseIcon.textContent = '⏸';
+          el.pauseLabel.textContent = '暫停 / 繼續';
+          el.btnPauseResume.classList.remove('bg-emerald-100', 'text-emerald-950', 'border-emerald-300');
+          el.btnPauseResume.classList.add('bg-amber-100', 'text-amber-950');
+        }
+
+        // 單句重複跟讀開關樣式
+        el.btnToggleLoop.setAttribute('aria-pressed', String(state.isLooping));
+        if (state.isLooping) {
+          el.btnToggleLoop.className = 'min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-[#2d6a4f] bg-[#d8f3dc] text-[#1b4332] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer shadow-xs';
+          el.loopStateTag.textContent = '開';
+          el.loopStateTag.className = 'px-2 py-0.5 rounded-md bg-[#1b4332] text-[#e9c46a] text-xs font-black';
+        } else {
+          el.btnToggleLoop.className = 'min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer';
+          el.loopStateTag.textContent = '關';
+          el.loopStateTag.className = 'px-2 py-0.5 rounded-md bg-slate-200 text-slate-600 text-xs font-extrabold';
+        }
+
+        // 顯示中文翻譯開關樣式
+        el.btnToggleTranslation.setAttribute('aria-pressed', String(state.showTranslation));
+        if (state.showTranslation) {
+          el.btnToggleTranslation.className = 'min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-[#d4a373] bg-[#fefae0] text-[#1b4332] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer shadow-xs';
+          el.transStateTag.textContent = '開';
+          el.transStateTag.className = 'px-2 py-0.5 rounded-md bg-[#9a741c] text-white text-xs font-black';
+        } else {
+          el.btnToggleTranslation.className = 'min-h-[44px] px-3.5 py-2 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer';
+          el.transStateTag.textContent = '關';
+          el.transStateTag.className = 'px-2 py-0.5 rounded-md bg-slate-200 text-slate-600 text-xs font-extrabold';
+        }
+      }
+
+      function renderAccentControls() {
+        const isUS = state.accent === 'en-US';
+        el.accentHint.textContent = isUS ? 'en-US 美式' : 'en-GB 英式';
+
+        if (isUS) {
+          el.btnAccentUS.className = 'min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer bg-[#1b4332] text-white shadow-sm';
+          el.btnAccentUK.className = 'min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer text-slate-600 hover:bg-slate-100';
+        } else {
+          el.btnAccentUK.className = 'min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer bg-[#1b4332] text-white shadow-sm';
+          el.btnAccentUS.className = 'min-h-[42px] px-2.5 py-2 rounded-lg font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer text-slate-600 hover:bg-slate-100';
+        }
+      }
+
+      function renderSpeedControls() {
+        el.speedSlider.value = String(state.rate);
+
+        let desc = '自訂語速';
+        if (state.rate <= 0.65) desc = '慢速跟讀';
+        else if (state.rate <= 0.85) desc = '清晰慢讀';
+        else if (state.rate >= 0.95 && state.rate <= 1.05) desc = '正常語速';
+        else if (state.rate >= 1.15) desc = '進階挑戰';
+
+        el.speedValueBadge.textContent = `${state.rate.toFixed(2)}x ${desc}`;
+
+        el.speedPresets.forEach(btn => {
+          const presetRate = parseFloat(btn.dataset.rate);
+          const isSelected = Math.abs(presetRate - state.rate) < 0.01;
+          if (isSelected) {
+            btn.className = 'speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border-2 border-[#1b4332] bg-[#d8f3dc] text-[#1b4332] font-extrabold text-xs transition cursor-pointer shadow-xs';
+          } else {
+            btn.className = 'speed-preset min-h-[40px] px-2 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-[#d8f3dc]/40 text-slate-700 font-bold text-xs transition cursor-pointer';
+          }
+        });
+      }
+
+      // 首次建立 3 段 12 句 DOM 結構
+      function buildPassageDOM() {
+        el.passageContainer.innerHTML = '';
+
+        PARAGRAPHS.forEach(para => {
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-3xl border-2 border-[#d4a373]/55 shadow-sm overflow-hidden';
+
+          const header = document.createElement('div');
+          header.className = 'px-4 sm:px-6 py-2.5 bg-[#f6f9f7] border-b border-[#d1dfd7] flex items-center justify-between';
+          header.innerHTML = `
+            <span class="px-3 py-0.5 rounded-full text-xs font-extrabold ${para.badgeColor}">
+              ${para.title}
+            </span>
+            <span class="text-xs font-bold text-slate-400">第 ${para.sentences[0].id}–${para.sentences[para.sentences.length - 1].id} 句</span>
+          `;
+          card.appendChild(header);
+
+          const list = document.createElement('div');
+          list.className = 'p-3 sm:p-4 space-y-3';
+
+          para.sentences.forEach(sentence => {
+            const box = document.createElement('div');
+            box.id = `sentence-card-${sentence.id}`;
+            box.className = 'rounded-2xl p-3.5 sm:p-4 border-2 border-slate-100 bg-[#fffdf7] transition-all duration-150 space-y-3';
+
+            box.innerHTML = `
+              <!-- 句子內容與本句最高星星徽章 -->
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-3 min-w-0 flex-1">
+                  <span class="sentence-num w-8 h-8 rounded-xl bg-[#e8f3ee] text-[#1b4332] font-black text-sm flex items-center justify-center shrink-0 mt-0.5">
+                    ${sentence.id}
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-lg sm:text-xl font-extrabold text-slate-800 leading-snug tracking-wide">
+                      ${sentence.en}
+                    </p>
+                    <p class="sentence-zh hidden mt-1.5 text-sm sm:text-base font-medium text-[#2d6a4f] bg-[#f6f9f7] px-2.5 py-1 rounded-lg border border-[#d1dfd7]/70">
+                      ${sentence.zh}
+                    </p>
+                    <div class="shadowing-hint hidden mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold">
+                      <span>🗣️ 換你跟著念一遍！（即將重複播放）</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 本句最高星星紀錄 -->
+                <div class="sentence-best-stars px-2.5 py-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-black text-slate-400 shrink-0" title="本句最高星星紀錄">
+                  ☆☆☆
+                </div>
+              </div>
+
+              <!-- 雙操作按鈕列：聽示範 & 換我唸 (評分) -->
+              <div class="flex flex-wrap items-center gap-2.5 pl-0 sm:pl-11">
+                <button type="button" class="btn-listen-demo min-h-[44px] px-4 py-2 rounded-xl bg-[#e8f3ee] hover:bg-[#d8f3dc] active:scale-[0.98] text-[#1b4332] border border-[#b7e4c7] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer">
+                  <span class="demo-icon-static">🔊</span>
+                  <span class="demo-waves hidden items-end gap-0.5 h-3.5">
+                    <span class="w-1 h-3.5 bg-[#1b4332] rounded-full wave-bar-1"></span>
+                    <span class="w-1 h-3.5 bg-[#1b4332] rounded-full wave-bar-2"></span>
+                    <span class="w-1 h-3.5 bg-[#1b4332] rounded-full wave-bar-3"></span>
+                  </span>
+                  <span class="demo-label">🔊 聽示範</span>
+                </button>
+
+                <button type="button" class="btn-speak-score min-h-[44px] px-4 py-2 rounded-xl bg-[#fefae0] hover:bg-[#faedcd] active:scale-[0.98] text-[#9a741c] border-2 border-[#d4a373] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer">
+                  <span class="mic-dot hidden w-2.5 h-2.5 rounded-full bg-white animate-ping"></span>
+                  <span class="mic-label">🎤 換我唸 (評分)</span>
+                </button>
+              </div>
+
+              <!-- 即時語音辨識氣泡（錄音中顯示小孩正在說的單字） -->
+              <div class="live-speech-box hidden ml-0 sm:ml-11 rounded-2xl bg-rose-50 border-2 border-rose-300 p-3 text-rose-950">
+                <div class="flex items-center justify-between gap-2 text-xs font-extrabold text-rose-700 mb-1">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+                    <span>麥克風收音中，請大聲唸出上面的英文句子...</span>
+                  </span>
+                  <span class="text-[11px] bg-rose-200/80 px-2 py-0.5 rounded-full">唸完可再按一次結束</span>
+                </div>
+                <p class="live-speech-text text-sm sm:text-base font-extrabold text-rose-900 min-h-[24px]">
+                  等待聲音輸入...
+                </p>
+              </div>
+
+              <!-- 口說評分結果卡片（完成後顯示星星、準確度、逐字紅綠燈、聽到的句子與鼓勵評語） -->
+              <div class="eval-result-box hidden ml-0 sm:ml-11 rounded-2xl bg-white border-2 border-[#2d6a4f]/40 p-3.5 sm:p-4 shadow-xs space-y-2.5"></div>
+            `;
+
+            const btnListen = box.querySelector('.btn-listen-demo');
+            const btnSpeak = box.querySelector('.btn-speak-score');
+
+            btnListen.addEventListener('click', () => {
+              playSentence(sentence.id, 'single', false);
+            });
+
+            btnSpeak.addEventListener('click', () => {
+              startRecording({ type: 'sentence', id: sentence.id });
+            });
+
+            list.appendChild(box);
+          });
+
+          card.appendChild(list);
+          el.passageContainer.appendChild(card);
+        });
+      }
+
+      // 首次建立 10 個重點單字 DOM 結構（含點讀發音 + 單字跟讀測試按鈕）
+      function buildVocabularyDOM() {
+        el.vocabContainer.innerHTML = '';
+
+        VOCABULARY.forEach(item => {
+          const card = document.createElement('div');
+          card.dataset.word = item.word;
+          card.className = 'vocab-card rounded-2xl p-3 border-2 border-slate-200 bg-[#fdfaf1] transition-all flex flex-col justify-between gap-2.5';
+
+          card.innerHTML = `
+            <button type="button" class="btn-vocab-listen w-full text-left group cursor-pointer">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-base sm:text-lg font-black text-[#1b4332] group-hover:text-[#2d6a4f] tracking-tight">${item.word}</span>
+                <span class="w-7 h-7 rounded-lg bg-white border border-slate-200 group-hover:border-[#2d6a4f] text-[#2d6a4f] flex items-center justify-center shrink-0 text-xs">
+                  🔊
+                </span>
+              </div>
+              <div class="mt-0.5 text-[11px] font-semibold text-slate-400">${item.phonetic} (${item.pos})</div>
+              <div class="mt-1 text-sm font-extrabold text-slate-700">${item.zh}</div>
+            </button>
+
+            <div class="space-y-1.5 pt-1 border-t border-[#d4a373]/30">
+              <button type="button" class="btn-vocab-mic w-full min-h-[38px] px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#fefae0] border border-[#d4a373] text-[#9a741c] font-extrabold text-xs flex items-center justify-center gap-1 transition cursor-pointer">
+                <span>🎤 單字跟讀測試</span>
+              </button>
+              <div class="vocab-feedback hidden text-[11px] font-extrabold px-2 py-1 rounded-lg text-center"></div>
+            </div>
+          `;
+
+          card.querySelector('.btn-vocab-listen').addEventListener('click', () => {
+            playVocabularyWord(item.word);
+          });
+
+          card.querySelector('.btn-vocab-mic').addEventListener('click', () => {
+            startRecording({ type: 'vocab', word: item.word });
+          });
+
+          el.vocabContainer.appendChild(card);
+        });
+      }
+
+      // 僅更新即時語音氣泡文字，避免重繪整個卡片影響效能
+      function renderLiveTranscriptOnly() {
+        if (!state.recordingTarget) return;
+        if (state.recordingTarget.type === 'sentence') {
+          const box = document.getElementById(`sentence-card-${state.recordingTarget.id}`);
+          if (box) {
+            const textEl = box.querySelector('.live-speech-text');
+            if (textEl) {
+              textEl.textContent = state.liveTranscript || '等待聲音輸入...';
+            }
+          }
+        } else if (state.recordingTarget.type === 'vocab') {
+          const card = el.vocabContainer.querySelector(`[data-word="${state.recordingTarget.word}"]`);
+          if (card) {
+            const fb = card.querySelector('.vocab-feedback');
+            if (fb) {
+              fb.classList.remove('hidden');
+              fb.className = 'vocab-feedback text-[11px] font-extrabold px-2 py-1 rounded-lg text-center bg-rose-100 text-rose-800';
+              fb.textContent = state.liveTranscript ? `聽到：${state.liveTranscript}` : '正在聽你唸...';
+            }
+          }
+        }
+      }
+
+      // 渲染單句評價結果 HTML
+      function renderEvaluationHTML(evalData) {
+        const starIcons = '⭐'.repeat(evalData.stars) + '☆'.repeat(3 - evalData.stars);
+        const badgeColor = evalData.stars === 3
+          ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+          : (evalData.stars === 2 ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-orange-100 text-orange-900 border-orange-300');
+
+        const wordBadgesHTML = evalData.wordResults.map(item => {
+          if (item.matched) {
+            return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs sm:text-sm font-extrabold">✓ ${escapeHTML(item.word)}</span>`;
+          } else {
+            return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-orange-100 text-orange-900 border border-orange-300 text-xs sm:text-sm font-extrabold">! ${escapeHTML(item.word)}</span>`;
+          }
+        }).join(' ');
+
+        return `
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100 animate-star-pop">
+            <div class="flex items-center gap-2">
+              <span class="text-lg sm:text-xl tracking-wider">${starIcons}</span>
+              <span class="px-2.5 py-0.5 rounded-full border text-xs font-black ${badgeColor}">
+                準確度 ${evalData.score}%
+              </span>
+            </div>
+            <span class="text-xs sm:text-sm font-extrabold text-[#1b4332]">
+              ${escapeHTML(evalData.praise)}
+            </span>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-[11px] font-bold text-slate-500">逐字發音檢測（綠色＝很標準，橘色＝再練習）：</p>
+            <div class="flex flex-wrap gap-1.5">
+              ${wordBadgesHTML}
+            </div>
+          </div>
+
+          <div class="text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200/80">
+            <span class="font-extrabold text-slate-700">我聽到的句子：</span>${escapeHTML(evalData.transcript)}
+          </div>
+        `;
+      }
+
+      function escapeHTML(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      // 更新 12 句與 10 個單字的完整視覺狀態
+      function renderPassageAndVocabStates() {
+        ALL_SENTENCES.forEach(sentence => {
+          const box = document.getElementById(`sentence-card-${sentence.id}`);
+          if (!box) return;
+
+          const isTTSActive = state.activeSentenceId === sentence.id;
+          const isRecActive = state.recordingTarget && state.recordingTarget.type === 'sentence' && state.recordingTarget.id === sentence.id;
+
+          const numBadge = box.querySelector('.sentence-num');
+          const zhEl = box.querySelector('.sentence-zh');
+          const shadowingEl = box.querySelector('.shadowing-hint');
+          const bestStarsEl = box.querySelector('.sentence-best-stars');
+          const btnListen = box.querySelector('.btn-listen-demo');
+          const demoStatic = box.querySelector('.demo-icon-static');
+          const demoWaves = box.querySelector('.demo-waves');
+          const demoLabel = box.querySelector('.demo-label');
+          const btnSpeak = box.querySelector('.btn-speak-score');
+          const micDot = box.querySelector('.mic-dot');
+          const micLabel = box.querySelector('.mic-label');
+          const liveBox = box.querySelector('.live-speech-box');
+          const liveText = box.querySelector('.live-speech-text');
+          const evalBox = box.querySelector('.eval-result-box');
+
+          // 1. 中文翻譯顯示
+          if (state.showTranslation) {
+            zhEl.classList.remove('hidden');
+          } else {
+            zhEl.classList.add('hidden');
+          }
+
+          // 2. 跟讀停頓提示
+          if (isTTSActive && state.isShadowingPause) {
+            shadowingEl.classList.remove('hidden');
+          } else {
+            shadowingEl.classList.add('hidden');
+          }
+
+          // 3. 最高星星紀錄徽章
+          const bestStarCount = Number(state.bestStars[sentence.id]) || 0;
+          if (bestStarCount > 0) {
+            bestStarsEl.textContent = '⭐'.repeat(bestStarCount) + '☆'.repeat(3 - bestStarCount);
+            bestStarsEl.className = 'sentence-best-stars px-2.5 py-1 rounded-xl bg-[#fefae0] border border-[#e9c46a] text-xs font-black text-[#9a741c] shrink-0';
+          } else {
+            bestStarsEl.textContent = '☆☆☆';
+            bestStarsEl.className = 'sentence-best-stars px-2.5 py-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-black text-slate-400 shrink-0';
+          }
+
+          // 4. 卡片外框高亮
+          if (isRecActive) {
+            box.className = 'rounded-2xl p-3.5 sm:p-4 border-2 border-rose-500 ring-4 ring-rose-200 bg-rose-50/30 shadow-md transition-all duration-150 space-y-3';
+            numBadge.className = 'sentence-num w-8 h-8 rounded-xl bg-rose-600 text-white font-black text-sm flex items-center justify-center shrink-0 mt-0.5';
+          } else if (isTTSActive) {
+            box.className = 'rounded-2xl p-3.5 sm:p-4 border-2 border-[#2d6a4f] ring-4 ring-[#e9c46a]/45 bg-[#fefae0] shadow-md transition-all duration-150 space-y-3';
+            numBadge.className = 'sentence-num w-8 h-8 rounded-xl bg-[#1b4332] text-[#e9c46a] font-black text-sm flex items-center justify-center shrink-0 mt-0.5';
+          } else {
+            box.className = 'rounded-2xl p-3.5 sm:p-4 border-2 border-slate-100 bg-[#fffdf7] hover:border-[#d4a373]/70 transition-all duration-150 space-y-3';
+            numBadge.className = 'sentence-num w-8 h-8 rounded-xl bg-[#e8f3ee] text-[#1b4332] font-black text-sm flex items-center justify-center shrink-0 mt-0.5';
+          }
+
+          // 5. 「聽示範」按鈕狀態
+          if (isTTSActive && !state.isPaused && !state.isShadowingPause) {
+            btnListen.className = 'btn-listen-demo min-h-[44px] px-4 py-2 rounded-xl bg-[#1b4332] text-[#e9c46a] border border-[#1b4332] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer shadow-xs';
+            demoStatic.classList.add('hidden');
+            demoWaves.classList.remove('hidden');
+            demoWaves.classList.add('flex');
+            demoLabel.textContent = '示範朗讀中...';
+          } else {
+            btnListen.className = 'btn-listen-demo min-h-[44px] px-4 py-2 rounded-xl bg-[#e8f3ee] hover:bg-[#d8f3dc] active:scale-[0.98] text-[#1b4332] border border-[#b7e4c7] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer';
+            demoStatic.classList.remove('hidden');
+            demoWaves.classList.add('hidden');
+            demoWaves.classList.remove('flex');
+            demoLabel.textContent = '聽示範';
+          }
+
+          // 6. 「換我唸 (評分)」按鈕狀態
+          if (isRecActive) {
+            btnSpeak.className = 'btn-speak-score min-h-[44px] px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white border-2 border-rose-700 font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer shadow-sm animate-pulse';
+            micDot.classList.remove('hidden');
+            micLabel.textContent = '正在聽你唸... (點此完成)';
+            liveBox.classList.remove('hidden');
+            liveText.textContent = state.liveTranscript || '等待聲音輸入...';
+          } else {
+            btnSpeak.className = 'btn-speak-score min-h-[44px] px-4 py-2 rounded-xl bg-[#fefae0] hover:bg-[#faedcd] active:scale-[0.98] text-[#9a741c] border-2 border-[#d4a373] font-extrabold text-xs sm:text-sm flex items-center gap-2 transition cursor-pointer';
+            micDot.classList.add('hidden');
+            micLabel.textContent = '🎤 換我唸 (評分)';
+            liveBox.classList.add('hidden');
+          }
+
+          // 7. 評分結果框顯示
+          const evalData = state.sentenceResults[sentence.id];
+          if (evalData && !isRecActive) {
+            evalBox.classList.remove('hidden');
+            evalBox.innerHTML = renderEvaluationHTML(evalData);
+          } else {
+            evalBox.classList.add('hidden');
+          }
+        });
+
+        // 更新 10 個單字卡狀態
+        const vocabCards = el.vocabContainer.querySelectorAll('.vocab-card');
+        vocabCards.forEach(card => {
+          const word = card.dataset.word;
+          const isVocabTTS = state.activeVocabWord === word;
+          const isVocabRec = state.recordingTarget && state.recordingTarget.type === 'vocab' && state.recordingTarget.word === word;
+          const micBtn = card.querySelector('.btn-vocab-mic');
+          const fbEl = card.querySelector('.vocab-feedback');
+
+          if (isVocabRec) {
+            card.className = 'vocab-card rounded-2xl p-3 border-2 border-rose-500 ring-4 ring-rose-200 bg-rose-50/40 transition-all flex flex-col justify-between gap-2.5';
+            micBtn.className = 'btn-vocab-mic w-full min-h-[38px] px-2.5 py-1.5 rounded-xl bg-rose-600 text-white border border-rose-700 font-extrabold text-xs flex items-center justify-center gap-1 transition cursor-pointer animate-pulse';
+            micBtn.innerHTML = '<span>🔴 正在聽你唸...</span>';
+            fbEl.classList.remove('hidden');
+            fbEl.className = 'vocab-feedback text-[11px] font-extrabold px-2 py-1 rounded-lg text-center bg-rose-100 text-rose-800';
+            fbEl.textContent = state.liveTranscript ? `聽到：${state.liveTranscript}` : '請大聲唸出單字...';
+          } else if (isVocabTTS) {
+            card.className = 'vocab-card rounded-2xl p-3 border-2 border-[#2d6a4f] ring-4 ring-[#e9c46a]/45 bg-[#fefae0] shadow-md transition-all flex flex-col justify-between gap-2.5';
+            micBtn.className = 'btn-vocab-mic w-full min-h-[38px] px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#fefae0] border border-[#d4a373] text-[#9a741c] font-extrabold text-xs flex items-center justify-center gap-1 transition cursor-pointer';
+            micBtn.innerHTML = '<span>🎤 單字跟讀測試</span>';
+          } else {
+            card.className = 'vocab-card rounded-2xl p-3 border-2 border-slate-200 bg-[#fdfaf1] hover:border-[#2d6a4f]/70 transition-all flex flex-col justify-between gap-2.5';
+            micBtn.className = 'btn-vocab-mic w-full min-h-[38px] px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#fefae0] border border-[#d4a373] text-[#9a741c] font-extrabold text-xs flex items-center justify-center gap-1 transition cursor-pointer';
+            micBtn.innerHTML = '<span>🎤 單字跟讀測試</span>';
+
+            const vocabRes = state.vocabResults[word];
+            if (vocabRes) {
+              fbEl.classList.remove('hidden');
+              if (vocabRes.matched) {
+                fbEl.className = 'vocab-feedback text-[11px] font-extrabold px-2 py-1 rounded-lg text-center bg-emerald-100 text-emerald-900 border border-emerald-300';
+                fbEl.textContent = '⭐⭐⭐ 發音超標準！';
+              } else {
+                fbEl.className = 'vocab-feedback text-[11px] font-extrabold px-2 py-1 rounded-lg text-center bg-orange-100 text-orange-900 border border-orange-300';
+                fbEl.textContent = `再試一次 (聽到: ${vocabRes.transcript})`;
+              }
+            } else {
+              fbEl.classList.add('hidden');
+            }
+          }
+        });
+      }
+
+      function renderAllStates() {
+        updateTopStarScoreboard();
+        renderControlButtons();
+        renderAccentControls();
+        renderSpeedControls();
+        renderPassageAndVocabStates();
+      }
+
+      // ==========================================
+      // 8. 純 JavaScript QR Code 產生器 (ISO/IEC 18004 標準，免外部 CDN)
+      // ==========================================
+      const QRCodeGenerator = (function () {
+        // GF(256) 指數與對數表
+        const EXP = new Uint8Array(512);
+        const LOG = new Uint8Array(256);
+        let x = 1;
+        for (let i = 0; i < 255; i++) {
+          EXP[i] = x;
+          LOG[x] = i;
+          x <<= 1;
+          if (x & 0x100) x ^= 0x11d;
+        }
+        for (let i = 255; i < 512; i++) {
+          EXP[i] = EXP[i - 255];
+        }
+
+        function gfMul(a, b) {
+          if (a === 0 || b === 0) return 0;
+          return EXP[LOG[a] + LOG[b]];
+        }
+
+        function getGeneratorPoly(ecCount) {
+          let poly = [1];
+          for (let i = 0; i < ecCount; i++) {
+            const next = new Array(poly.length + 1).fill(0);
+            const factor = EXP[i];
+            for (let j = 0; j < poly.length; j++) {
+              next[j] ^= poly[j];
+              next[j + 1] ^= gfMul(poly[j], factor);
+            }
+            poly = next;
+          }
+          return poly;
+        }
+
+        function computeRS(data, ecCount) {
+          const gen = getGeneratorPoly(ecCount);
+          const res = new Uint8Array(ecCount);
+          for (let i = 0; i < data.length; i++) {
+            const coef = data[i] ^ res[0];
+            for (let j = 0; j < ecCount - 1; j++) {
+              res[j] = res[j + 1] ^ gfMul(gen[j + 1], coef);
+            }
+            res[ecCount - 1] = gfMul(gen[ecCount], coef);
+          }
+          return res;
+        }
+
+        // 版本 1~10 (Error Correction Level M) 規格表
+        const VERSION_SPECS = [
+          null,
+          { size: 21, totalData: 16, ecPerBlock: 10, blocks: [16], align: [] },
+          { size: 25, totalData: 28, ecPerBlock: 16, blocks: [28], align: [6, 18] },
+          { size: 29, totalData: 44, ecPerBlock: 26, blocks: [44], align: [6, 22] },
+          { size: 33, totalData: 64, ecPerBlock: 18, blocks: [32, 32], align: [6, 26] },
+          { size: 37, totalData: 86, ecPerBlock: 24, blocks: [43, 43], align: [6, 30] },
+          { size: 41, totalData: 108, ecPerBlock: 16, blocks: [27, 27, 27, 27], align: [6, 34] },
+          { size: 45, totalData: 124, ecPerBlock: 18, blocks: [31, 31, 31, 31], align: [6, 22, 38] },
+          { size: 49, totalData: 154, ecPerBlock: 22, blocks: [38, 38, 39, 39], align: [6, 24, 42] },
+          { size: 53, totalData: 182, ecPerBlock: 22, blocks: [36, 36, 36, 37, 37], align: [6, 26, 46] },
+          { size: 57, totalData: 216, ecPerBlock: 26, blocks: [43, 43, 43, 43, 44], align: [6, 28, 50] }
+        ];
+
+        const VERSION_INFO_BITS = {
+          7: 0x07c94,
+          8: 0x085bc,
+          9: 0x09a99,
+          10: 0x0a4d3
+        };
+
+        // ECC Level M + Mask 0..7 預先計算之 15-bit 格式資訊
+        const FORMAT_BITS_M = [
+          0x5412, 0x5125, 0x5e7c, 0x5b4b,
+          0x45f9, 0x40ce, 0x4f97, 0x4aa0
+        ];
+
+        function encodeData(text) {
+          const utf8Bytes = new TextEncoder().encode(text);
+          let version = 1;
+          for (; version <= 10; version++) {
+            const countBits = version <= 9 ? 8 : 16;
+            const overheadBytes = Math.ceil((4 + countBits) / 8);
+            if (utf8Bytes.length + overheadBytes <= VERSION_SPECS[version].totalData) {
+              break;
+            }
+          }
+          if (version > 10) {
+            throw new Error('URL too long for QR v10');
+          }
+
+          const spec = VERSION_SPECS[version];
+          const bits = [];
+          const pushBits = (val, len) => {
+            for (let i = len - 1; i >= 0; i--) {
+              bits.push((val >>> i) & 1);
+            }
+          };
+
+          // Byte 模式指示符 0100
+          pushBits(0b0100, 4);
+          pushBits(utf8Bytes.length, version <= 9 ? 8 : 16);
+          for (let i = 0; i < utf8Bytes.length; i++) {
+            pushBits(utf8Bytes[i], 8);
+          }
+
+          const maxBits = spec.totalData * 8;
+          const termLen = Math.min(4, maxBits - bits.length);
+          pushBits(0, termLen);
+          while (bits.length % 8 !== 0) {
+            bits.push(0);
+          }
+
+          const dataCodewords = [];
+          for (let i = 0; i < bits.length; i += 8) {
+            let byte = 0;
+            for (let b = 0; b < 8; b++) {
+              byte = (byte << 1) | bits[i + b];
+            }
+            dataCodewords.push(byte);
+          }
+
+          const padBytes = [0xec, 0x11];
+          let padIdx = 0;
+          while (dataCodewords.length < spec.totalData) {
+            dataCodewords.push(padBytes[padIdx % 2]);
+            padIdx++;
+          }
+
+          // 分割區塊並計算 Reed-Solomon 糾錯碼
+          const dataBlocks = [];
+          const ecBlocks = [];
+          let offset = 0;
+          for (const blockLen of spec.blocks) {
+            const block = dataCodewords.slice(offset, offset + blockLen);
+            offset += blockLen;
+            dataBlocks.push(block);
+            ecBlocks.push(computeRS(block, spec.ecPerBlock));
+          }
+
+          // 交錯排列資料與糾錯碼字元
+          const finalCodewords = [];
+          const maxDataLen = Math.max(...spec.blocks);
+          for (let i = 0; i < maxDataLen; i++) {
+            for (let b = 0; b < dataBlocks.length; b++) {
+              if (i < dataBlocks[b].length) {
+                finalCodewords.push(dataBlocks[b][i]);
+              }
+            }
+          }
+          for (let i = 0; i < spec.ecPerBlock; i++) {
+            for (let b = 0; b < ecBlocks.length; b++) {
+              finalCodewords.push(ecBlocks[b][i]);
+            }
+          }
+
+          return { version, spec, finalCodewords };
+        }
+
+        function buildMatrix(text) {
+          const { version, spec, finalCodewords } = encodeData(text);
+          const N = spec.size;
+          const modules = Array.from({ length: N }, () => new Int8Array(N)); // 0=empty, 1=dark, -1=light
+          const isFunc = Array.from({ length: N }, () => new Uint8Array(N));
+
+          function setFunc(r, c, dark) {
+            if (r >= 0 && r < N && c >= 0 && c < N) {
+              modules[r][c] = dark ? 1 : -1;
+              isFunc[r][c] = 1;
+            }
+          }
+
+          // 放置 7x7 定位圖案與 1 格白邊
+          function placeFinder(top, left) {
+            for (let dr = -1; dr <= 7; dr++) {
+              for (let dc = -1; dc <= 7; dc++) {
+                const inOuter = dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6;
+                const isBorder = dr === 0 || dr === 6 || dc === 0 || dc === 6;
+                const isInner = dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4;
+                setFunc(top + dr, left + dc, inOuter && (isBorder || isInner));
+              }
+            }
+          }
+          placeFinder(0, 0);
+          placeFinder(0, N - 7);
+          placeFinder(N - 7, 0);
+
+          // 校正圖案 (Version >= 2)
+          const alignCoords = spec.align;
+          for (let i = 0; i < alignCoords.length; i++) {
+            for (let j = 0; j < alignCoords.length; j++) {
+              const r = alignCoords[i];
+              const c = alignCoords[j];
+              if (isFunc[r][c]) continue;
+              for (let dr = -2; dr <= 2; dr++) {
+                for (let dc = -2; dc <= 2; dc++) {
+                  const dark = Math.max(Math.abs(dr), Math.abs(dc)) !== 1;
+                  setFunc(r + dr, c + dc, dark);
+                }
+              }
+            }
+          }
+
+          // 時序圖案
+          for (let i = 8; i < N - 8; i++) {
+            if (!isFunc[6][i]) setFunc(6, i, i % 2 === 0);
+            if (!isFunc[i][6]) setFunc(i, 6, i % 2 === 0);
+          }
+
+          // 保留格式資訊區與暗點
+          setFunc(N - 8, 8, true);
+          for (let i = 0; i < 9; i++) {
+            if (!isFunc[8][i]) setFunc(8, i, false);
+            if (!isFunc[i][8]) setFunc(i, 8, false);
+          }
+          for (let i = 0; i < 8; i++) {
+            if (!isFunc[8][N - 1 - i]) setFunc(8, N - 1 - i, false);
+            if (!isFunc[N - 1 - i][8]) setFunc(N - 1 - i, 8, false);
+          }
+
+          // Version >= 7 版本資訊區
+          if (version >= 7) {
+            const vBits = VERSION_INFO_BITS[version];
+            for (let i = 0; i < 18; i++) {
+              const dark = ((vBits >>> i) & 1) === 1;
+              const r = Math.floor(i / 3);
+              const c = N - 11 + (i % 3);
+              setFunc(r, c, dark);
+              setFunc(c, r, dark);
+            }
+          }
+
+          // Z 字形填入資料位元並套用 Mask 0 ((r + c) % 2 === 0)
+          const maskIdx = 0;
+          let bitIndex = 0;
+          const totalBits = finalCodewords.length * 8;
+          let upward = true;
+
+          for (let right = N - 1; right >= 1; right -= 2) {
+            if (right === 6) right = 5; // 跳過垂直時序線
+            for (let step = 0; step < N; step++) {
+              const r = upward ? N - 1 - step : step;
+              for (let dx = 0; dx < 2; dx++) {
+                const c = right - dx;
+                if (isFunc[r][c]) continue;
+                let bit = 0;
+                if (bitIndex < totalBits) {
+                  const byte = finalCodewords[bitIndex >>> 3];
+                  bit = (byte >>> (7 - (bitIndex & 7))) & 1;
+                  bitIndex++;
+                }
+                const maskCond = (r + c) % 2 === 0;
+                const finalDark = (bit ^ (maskCond ? 1 : 0)) === 1;
+                modules[r][c] = finalDark ? 1 : -1;
+              }
+            }
+            upward = !upward;
+          }
+
+          // 寫入格式資訊 (ECC Level M, Mask 0)
+          const fmt = FORMAT_BITS_M[maskIdx];
+          for (let i = 0; i < 15; i++) {
+            const dark = ((fmt >>> i) & 1) === 1;
+            // 水平條
+            if (i < 6) setFunc(8, i, dark);
+            else if (i < 8) setFunc(8, i + 1, dark);
+            else setFunc(8, N - 15 + i, dark);
+
+            // 垂直條
+            if (i < 8) setFunc(N - 1 - i, 8, dark);
+            else if (i < 9) setFunc(15 - i, 8, dark);
+            else setFunc(14 - i, 8, dark);
+          }
+
+          return { size: N, modules };
+        }
+
+        function drawToCanvas(canvas, text) {
+          const ctx = canvas.getContext('2d');
+          const { size, modules } = buildMatrix(text);
+          const quietZone = 4;
+          const totalModules = size + quietZone * 2;
+          const scale = Math.floor(canvas.width / totalModules) || 4;
+          const actualPx = totalModules * scale;
+
+          canvas.width = actualPx;
+          canvas.height = actualPx;
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, actualPx, actualPx);
+
+          ctx.fillStyle = '#1b4332'; // 海拉魯深森林綠 QR Code，高對比且易掃描
+          for (let r = 0; r < size; r++) {
+            for (let c = 0; c < size; c++) {
+              if (modules[r][c] === 1) {
+                ctx.fillRect(
+                  (c + quietZone) * scale,
+                  (r + quietZone) * scale,
+                  scale,
+                  scale
+                );
+              }
+            }
+          }
+        }
+
+        return { drawToCanvas };
+      })();
+
+      function renderQRCodeForUrl(targetUrl) {
+        const cleanUrl = (targetUrl || '').trim() || 'https://example.com/zelda_reading.html';
+        el.qrUrlDisplay.textContent = cleanUrl;
+        el.qrCustomUrlInput.value = cleanUrl;
+
+        try {
+          QRCodeGenerator.drawToCanvas(el.qrCanvas, cleanUrl);
+        } catch (e) {
+          // 若網址過長，截斷至安全長度後重試
+          const fallbackUrl = cleanUrl.slice(0, 180);
+          QRCodeGenerator.drawToCanvas(el.qrCanvas, fallbackUrl);
+        }
+      }
+
+      function openQrModal() {
+        const currentHref = window.location.href;
+        const defaultUrl = currentHref.startsWith('http')
+          ? currentHref
+          : 'https://yourname.github.io/english/zelda_reading.html';
+
+        el.qrModal.classList.remove('hidden');
+        renderQRCodeForUrl(defaultUrl);
+      }
+
+      function closeQrModal() {
+        el.qrModal.classList.add('hidden');
+      }
+
+      function downloadQrImage() {
+        try {
+          const link = document.createElement('a');
+          link.download = 'zelda_english_qrcode.png';
+          link.href = el.qrCanvas.toDataURL('image/png');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          updateStatus('✅ 已下載 QR Code 圖片，可直接貼入紙本講義！', 'bg-[#e9c46a]');
+        } catch (e) {
+          updateStatus('⚠️ 無法自動下載圖片，請長按或右鍵儲存 QR Code', 'bg-amber-400');
+        }
+      }
+
+      // ==========================================
+      // 9. 事件監聽綁定
+      // ==========================================
+      function bindEvents() {
+        el.btnPlayAll.addEventListener('click', () => {
+          playSentence(1, 'all', true);
+        });
+
+        el.btnPauseResume.addEventListener('click', () => {
+          togglePauseResume();
+        });
+
+        el.btnStop.addEventListener('click', () => {
+          stopTTS(true);
+        });
+
+        el.btnToggleLoop.addEventListener('click', () => {
+          state.isLooping = !state.isLooping;
+          if (!state.isLooping && state.isShadowingPause) {
+            stopTTS(true);
+            return;
+          }
+          renderControlButtons();
+        });
+
+        el.btnToggleTranslation.addEventListener('click', () => {
+          state.showTranslation = !state.showTranslation;
+          renderControlButtons();
+          renderPassageAndVocabStates();
+        });
+
+        el.btnAccentUS.addEventListener('click', () => setAccent('en-US'));
+        el.btnAccentUK.addEventListener('click', () => setAccent('en-GB'));
+
+        el.voiceSelect.addEventListener('change', (e) => {
+          state.selectedVoiceURI = e.target.value;
+          if ((state.ttsMode === 'single' || state.ttsMode === 'all') && state.activeSentenceId && !state.isPaused) {
+            playSentence(state.activeSentenceId, state.ttsMode, false);
+          } else if (state.ttsMode === 'vocab' && state.activeVocabWord) {
+            playVocabularyWord(state.activeVocabWord);
+          }
+        });
+
+        el.speedPresets.forEach(btn => {
+          btn.addEventListener('click', () => {
+            setSpeechRate(parseFloat(btn.dataset.rate));
+          });
+        });
+
+        el.speedSlider.addEventListener('input', (e) => {
+          setSpeechRate(parseFloat(e.target.value));
+        });
+
+        // 重置星星紀錄兩段式確認（絕不使用 confirm / alert）
+        el.btnResetStars.addEventListener('click', () => {
+          el.btnResetStars.classList.add('hidden');
+          el.resetConfirmBox.classList.remove('hidden');
+          el.resetConfirmBox.classList.add('flex');
+        });
+
+        el.btnCancelReset.addEventListener('click', () => {
+          el.resetConfirmBox.classList.add('hidden');
+          el.resetConfirmBox.classList.remove('flex');
+          el.btnResetStars.classList.remove('hidden');
+        });
+
+        el.btnConfirmReset.addEventListener('click', () => {
+          state.bestStars = {};
+          state.sentenceResults = {};
+          state.vocabResults = {};
+          saveStarsToStorage();
+          el.resetConfirmBox.classList.add('hidden');
+          el.resetConfirmBox.classList.remove('flex');
+          el.btnResetStars.classList.remove('hidden');
+          renderAllStates();
+          updateStatus('🔄 已清空所有勇者星星紀錄，重新開始挑戰吧！', 'bg-[#e9c46a]');
+        });
+
+        // QR Code 視窗事件
+        el.btnOpenQrModal.addEventListener('click', openQrModal);
+        el.btnCloseQrModal.addEventListener('click', closeQrModal);
+        el.btnCloseQrModalBottom.addEventListener('click', closeQrModal);
+        el.qrModal.addEventListener('click', (e) => {
+          if (e.target === el.qrModal) closeQrModal();
+        });
+        el.btnRegenerateQr.addEventListener('click', () => {
+          renderQRCodeForUrl(el.qrCustomUrlInput.value);
+        });
+        el.btnDownloadQr.addEventListener('click', downloadQrImage);
+
+        if (synth) {
+          populateVoiceDropdown(true);
+          if (typeof synth.onvoiceschanged !== 'undefined') {
+            synth.onvoiceschanged = () => {
+              populateVoiceDropdown(true);
+            };
+          }
+        }
+
+        window.addEventListener('beforeunload', () => {
+          if (synth) {
+            try { synth.cancel(); } catch (e) {}
+          }
+          if (activeRecognition) {
+            try { activeRecognition.abort(); } catch (e) {}
+          }
+        });
+      }
+
+      // ==========================================
+      // 10. 啟動應用程式
+      // ==========================================
+      loadStarsFromStorage();
+      checkEnvironmentSupport();
+      buildPassageDOM();
+      buildVocabularyDOM();
+      bindEvents();
+      renderAllStates();
+    })();
+  </script>
+</body>
+</html>
